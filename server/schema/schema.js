@@ -16,7 +16,9 @@ const CardType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
+    image: { type: GraphQLString },
     gasReward: { type: GraphQLFloat },
+    gasReward_additional: { type: GraphQLString },
     restaurantReward: { type: GraphQLFloat },
     onlineReward: { type: GraphQLFloat },
     travelReward: { type: GraphQLFloat },
@@ -45,21 +47,15 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     Card: {
       type: CardType,
-      args: { id: { type: GraphQLID } },
+      args: { name: { type: new GraphQLNonNull(GraphQLString) } },
       resolve(parent, args) {
-        return Card.findById(args.id);
+        return Card.findOne({ name: args.name });
       }
     },
     Cards: {
       type: new GraphQLList(CardType),
-      resolve(parent, args) {
+      resolve() {
         return Card.find({});
-      }
-    },
-    Gas: {
-      type: new GraphQLList(CardType),
-      resolve(parent, args) {
-        return Card.find({}).sort({ gasReward: 'desc' });
       }
     }
     //   author: {
@@ -91,7 +87,9 @@ const Mutation = new GraphQLObjectType({
       type: CardType,
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
+        image: { type: new GraphQLNonNull(GraphQLString) },
         gasReward: { type: GraphQLFloat },
+        gasReward_additional: { type: GraphQLString },
         restaurantReward: { type: GraphQLFloat },
         onlineReward: { type: GraphQLFloat },
         travelReward: { type: GraphQLFloat },
@@ -101,7 +99,9 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         const card = new Card({
           name: args.name,
+          image: args.image,
           gasReward: args.gasReward,
+          gasReward_additional: args.gasReward_additional,
           restaurantReward: args.restaurantReward,
           onlineReward: args.onlineReward,
           travelReward: args.travelReward,

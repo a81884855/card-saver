@@ -5,7 +5,9 @@ const getCardsQuery = gql`
     Cards {
       id
       name
+      image
       gasReward
+      gasReward_additional
       restaurantReward
       onlineReward
       travelReward
@@ -15,11 +17,19 @@ const getCardsQuery = gql`
   }
 `;
 
-const getBooksQuery = gql`
-  {
-    books {
-      name
+const getCardQuery = gql`
+  query($name: String!) {
+    Card(name: $name) {
       id
+      name
+      image
+      gasReward
+      gasReward_additional
+      restaurantReward
+      onlineReward
+      travelReward
+      desc
+      website
     }
   }
 `;
@@ -52,4 +62,4 @@ const getBookQuery = gql`
   }
 `;
 
-export { getCardsQuery, getBooksQuery, addBookMutation, getBookQuery };
+export { getCardsQuery, getCardQuery, addBookMutation, getBookQuery };

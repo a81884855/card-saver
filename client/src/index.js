@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -8,7 +9,8 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 const client = new ApolloClient({
-  uri: 'http://13.52.77.112:4000/graphql'
+  // uri: 'http://13.52.77.112:4000/graphql'
+  uri: 'http://localhost:4000/graphql'
 });
 
 ReactDOM.render(

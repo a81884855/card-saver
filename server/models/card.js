@@ -4,9 +4,14 @@ const { Schema } = mongoose;
 
 const cardSchema = new Schema({
   name: String,
+  image: String,
   gasReward: {
     type: Number,
     default: 1
+  },
+  gasReward_additional: {
+    type: String,
+    default: ''
   },
   restaurantReward: {
     type: Number,
