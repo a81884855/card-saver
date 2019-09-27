@@ -9,7 +9,7 @@ const port = 4000;
 
 app.use(cors());
 
-mongoose.connect('mongodb://admin:123456a@ds033143.mlab.com:33143/card-saver', {
+mongoose.connect('mongodb://readonly:0987654321qa@ds033143.mlab.com:33143/card-saver', {
   useNewUrlParser: true
 });
 
