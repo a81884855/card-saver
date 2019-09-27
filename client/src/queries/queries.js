@@ -6,13 +6,23 @@ const getCardsQuery = gql`
       id
       name
       image
-      gasReward
-      gasReward_additional
-      restaurantReward
-      onlineReward
-      travelReward
+      gas
+      gasAdditional
+      restaurant
+      restaurantAdditional
+      online
+      onlineAdditional
+      travel
+      travelAdditional
+      furnitures
+      furnituresAdditional
+      utilities
+      utilitiesAdditional
+      phone
+      phoneAdditional
       desc
       website
+      annual
     }
   }
 `;
@@ -23,13 +33,23 @@ const getCardQuery = gql`
       id
       name
       image
-      gasReward
-      gasReward_additional
-      restaurantReward
-      onlineReward
-      travelReward
+      gas
+      gasAdditional
+      restaurant
+      restaurantAdditional
+      onlineAdditional
+      travelAdditional
+      furnitures
+      furnituresAdditional
+      utilities
+      utilitiesAdditional
+      phone
+      phoneAdditional
+      online
+      travel
       desc
       website
+      annual
     }
   }
 `;

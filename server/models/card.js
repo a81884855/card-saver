@@ -5,28 +5,69 @@ const { Schema } = mongoose;
 const cardSchema = new Schema({
   name: String,
   image: String,
-  gasReward: {
+  bank: String,
+  gas: {
     type: Number,
     default: 1
   },
-  gasReward_additional: {
+  gasAdditional: {
     type: String,
     default: ''
   },
-  restaurantReward: {
+  restaurant: {
     type: Number,
     default: 1
   },
-  onlineReward: {
+  restaurantAdditional: {
+    type: String,
+    default: ''
+  },
+  online: {
     type: Number,
     default: 1
   },
-  travelReward: {
+  onlineAdditional: {
+    type: String,
+    default: ''
+  },
+  travel: {
     type: Number,
     default: 1
+  },
+  travelAdditional: {
+    type: String,
+    default: ''
+  },
+  furnitures: {
+    type: Number,
+    default: 1
+  },
+  furnituresAdditional: {
+    type: String,
+    default: ''
+  },
+  utilities: {
+    type: Number,
+    default: 1
+  },
+  utilitiesAdditional: {
+    type: String,
+    default: ''
+  },
+  phone: {
+    type: Number,
+    default: 1
+  },
+  phoneAdditional: {
+    type: String,
+    default: ''
   },
   desc: String,
-  website: String
+  website: String,
+  annual: {
+    type: Number,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model('Cards', cardSchema);
