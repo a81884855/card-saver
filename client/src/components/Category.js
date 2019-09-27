@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Container, Row, Col } from 'react-bootstrap';
+import { Image, Container } from 'react-bootstrap';
 
 export class Category extends Component {
   constructor(props) {
@@ -12,21 +12,19 @@ export class Category extends Component {
     if (data.loading) {
       return <div>Loading cards...</div>;
     } else {
-      console.log(data.Cards.sort((a, b) => b[`${category}Reward`] - a[`${category}Reward`]));
-      return data.Cards.sort((a, b) => b[`${category}Reward`] - a[`${category}Reward`])
+      console.log(data);
+      return data.Cards.sort((a, b) => b[`${category}`] - a[`${category}`])
         .slice(0, 10)
         .map(card => {
           return (
             <li key={card.id}>
               <a href={`/cards/${card.name}`}>
-                {card.name} - {card[`${category}Reward`]}%
-                {card[`${category}Reward_additional`]
-                  ? ' (' + card[`${category}Reward_additional`] + ')'
-                  : null}
+                {card.name} - {card[`${category}`]}%
+                {card[`${category}Additional`] ? ' (' + card[`${category}Additional`] + ')' : null}
               </a>
               <div>
                 <Image
-                  src={card.image}
+                  src={`/images/${card.image}`}
                   style={{
                     border: 'none',
                     background: 'none',

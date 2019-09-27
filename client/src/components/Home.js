@@ -27,97 +27,87 @@ export class Home extends Component {
     const { data } = this.props;
     const { category } = this.state;
     return (
-      <Container>
-        <Row>
-          <Col
-            xs={11}
-            sm={5}
-            style={{
-              margin: '1rem auto',
-              height: '100vh'
-            }}
-          >
-            <Row style={{ margin: 'auto', width: '95%' }}>
-              <Col xs={4} className="categories">
-                <button
-                  className="category_container"
-                  onClick={e => this.setState({ category: 'gas' })}
-                >
-                  <MdLocalGasStation />
-                  <span>Gas</span>
-                </button>
-              </Col>
-              <Col xs={4} className="categories">
-                <button
-                  className="category_container"
-                  onClick={e => this.setState({ category: 'restaurant' })}
-                >
-                  <MdRestaurant />
-                  <span>Restaurant</span>
-                </button>
-              </Col>
-              <Col xs={4} className="categories">
-                <button
-                  className="category_container"
-                  onClick={e => this.setState({ category: 'travel' })}
-                >
-                  <MdCardTravel />
-                  <span>Travel</span>
-                </button>
-              </Col>
-              <Col xs={4} className="categories">
-                <button
-                  className="category_container"
-                  onClick={e => this.setState({ category: 'online' })}
-                >
-                  <MdComputer />
-                  <span>Online Shopping</span>
-                </button>
-              </Col>
-              <Col xs={4} className="categories">
-                <button
-                  className="category_container"
-                  onClick={e => this.setState({ category: 'furnitures' })}
-                >
-                  <TiHomeOutline />
-                  <span>Furnitures Store</span>
-                </button>
-              </Col>
-              <Col xs={4} className="categories">
-                <button
-                  className="category_container"
-                  onClick={e => this.setState({ category: 'utilities' })}
-                >
-                  <GiCeilingLight />
-                  <span>Utilities</span>
-                </button>
-              </Col>
-              <Col xs={4} className="categories">
-                <button
-                  className="category_container"
-                  onClick={e => this.setState({ category: 'phone' })}
-                >
-                  <MdPhoneIphone />
-                  <span>Phone Bill</span>
-                </button>
-              </Col>
-            </Row>
-          </Col>
-          <Col
-            xs={11}
-            sm={7}
-            style={{
-              background: 'aliceblue',
-              margin: '1rem auto'
-            }}
-          >
-            <h3 style={{ paddingLeft: '10px' }}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </h3>
-            <Category data={data} category={category} />
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col xs={11} sm={5}>
+          <Row style={{ margin: 'auto', width: '95%' }}>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'gas' })}
+              >
+                <MdLocalGasStation />
+                <span>Gas</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'restaurant' })}
+              >
+                <MdRestaurant />
+                <span>Restaurant</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'travel' })}
+              >
+                <MdCardTravel />
+                <span>Travel</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'online' })}
+              >
+                <MdComputer />
+                <span>Online Shopping</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'furnitures' })}
+              >
+                <TiHomeOutline />
+                <span>Furnitures Store</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'utilities' })}
+              >
+                <GiCeilingLight />
+                <span>Utilities</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'phone' })}
+              >
+                <MdPhoneIphone />
+                <span>Phone Bill</span>
+              </button>
+            </Col>
+          </Row>
+        </Col>
+        <Col
+          xs={11}
+          sm={7}
+          style={{
+            background: 'aliceblue'
+          }}
+        >
+          <h3 style={{ paddingLeft: '10px' }}>
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </h3>
+          <Category data={data} category={category} />
+        </Col>
+      </Row>
     );
   }
 }
