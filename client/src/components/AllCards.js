@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { getCardsQuery } from '../queries/queries.js';
 import { Helmet } from 'react-helmet';
-import { Col, Row, Image, Button } from 'react-bootstrap';
+import { Col, Row, Image } from 'react-bootstrap';
 
 const head = () => {
   return (
@@ -26,12 +26,13 @@ export class CardList extends Component {
     } else {
       return data.Cards.map(card => {
         return (
-          <Col md={4} style={{ marginBottom: '20px' }}>
+          <Col md={4} key={card.id} style={{ marginBottom: '15px' }}>
             <a href={`/cards/${card.name}`}>
               <Image
                 src={`/images/${card.image}`}
                 style={{
-                  width: '100%'
+                  width: '100%',
+                  border: 'none'
                 }}
                 thumbnail
               />
@@ -58,10 +59,13 @@ export class CardList extends Component {
   }
   render() {
     return (
-      <Row>
-        {head()}
-        {this.displayCards()}
-      </Row>
+      <>
+        <h2>All Credit Cards</h2>
+        <Row>
+          {head()}
+          {this.displayCards()}
+        </Row>
+      </>
     );
   }
 }
