@@ -42,6 +42,10 @@ export class Card extends Component {
                   {Card.restaurantAdditional ? ' (' + Card.restaurantAdditional + ')' : null}
                 </li>
                 <li>
+                  Grocery: {Card.grocery}%
+                  {Card.groceryAdditional ? ' (' + Card.groceryAdditional + ')' : null}
+                </li>
+                <li>
                   Online Shopping: {Card.online}%
                   {Card.onlineAdditional ? ' (' + Card.onlineAdditional + ')' : null}
                 </li>
@@ -80,15 +84,12 @@ export class Card extends Component {
   }
 
   render() {
-    const { data } = this.props;
     return <Container>{this.displayCard()}</Container>;
   }
 }
 
 export default graphql(getCardQuery, {
   options: props => {
-    console.log(`${props.match.params.name}`);
-
     return {
       variables: {
         name: props.match.params.name
