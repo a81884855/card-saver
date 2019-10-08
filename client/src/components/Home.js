@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { getCardsQuery } from '../queries/queries.js';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import {
   MdLocalGasStation,
   MdRestaurant,
   MdCardTravel,
   MdComputer,
-  MdPhoneIphone
+  MdPhoneIphone,
+  MdLocalGroceryStore
 } from 'react-icons/md';
 import { TiHomeOutline } from 'react-icons/ti';
 import { GiCeilingLight } from 'react-icons/gi';
+import { IoIosDesktop } from 'react-icons/io';
 
 import Category from './Category';
 
@@ -28,8 +30,8 @@ export class Home extends Component {
     const { category } = this.state;
     return (
       <Row>
-        <Col xs={11} sm={5}>
-          <Row style={{ margin: 'auto', width: '95%' }}>
+        <Col sm={11} md={5}>
+          <Row style={{ margin: '0 auto 10px', width: '95%' }}>
             <Col xs={4} className="categories">
               <button
                 className="category_container"
@@ -46,6 +48,15 @@ export class Home extends Component {
               >
                 <MdRestaurant />
                 <span>Restaurant</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
+                onClick={e => this.setState({ category: 'grocery' })}
+              >
+                <MdLocalGroceryStore />
+                <span>Grocery / Super Market</span>
               </button>
             </Col>
             <Col xs={4} className="categories">
@@ -78,6 +89,15 @@ export class Home extends Component {
             <Col xs={4} className="categories">
               <button
                 className="category_container"
+                onClick={e => this.setState({ category: 'streaming' })}
+              >
+                <IoIosDesktop />
+                <span>Streaming</span>
+              </button>
+            </Col>
+            <Col xs={4} className="categories">
+              <button
+                className="category_container"
                 onClick={e => this.setState({ category: 'utilities' })}
               >
                 <GiCeilingLight />
@@ -96,15 +116,10 @@ export class Home extends Component {
           </Row>
         </Col>
         <Col
-          xs={11}
-          sm={7}
           style={{
             background: 'aliceblue'
           }}
         >
-          <h3 style={{ paddingLeft: '10px' }}>
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </h3>
           <Category data={data} category={category} />
         </Col>
       </Row>
