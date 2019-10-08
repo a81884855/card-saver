@@ -3,13 +3,14 @@ const graphqlHTTP = require('express-graphql');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const schema = require('./schema/schema');
+const config = require('./config');
 
 const app = express();
 const port = 4000;
 
 app.use(cors());
 
-mongoose.connect('mongodb://readonly:0987654321qa@ds033143.mlab.com:33143/card-saver', {
+mongoose.connect(config.url, {
   useNewUrlParser: true
 });
 
