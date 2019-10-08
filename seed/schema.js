@@ -44,6 +44,22 @@ const cardSchema = new Schema({
     type: String,
     default: ''
   },
+  grocery: {
+    type: Number,
+    default: 1
+  },
+  groceryAdditional: {
+    type: String,
+    default: ''
+  },
+  streaming: {
+    type: Number,
+    default: 1
+  },
+  streamingAdditional: {
+    type: String,
+    default: ''
+  },
   travel: {
     type: Number,
     default: 1

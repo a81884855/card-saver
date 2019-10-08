@@ -1,5 +1,6 @@
 const graphql = require('graphql');
 const Card = require('../models/card');
+const Category = require('../models/category');
 
 const {
   GraphQLObjectType,
@@ -21,8 +22,12 @@ const CardType = new GraphQLObjectType({
     gasAdditional: { type: GraphQLString },
     restaurant: { type: GraphQLFloat },
     restaurantAdditional: { type: GraphQLString },
+    grocery: { type: GraphQLFloat },
+    groceryAdditional: { type: GraphQLString },
     online: { type: GraphQLFloat },
     onlineAdditional: { type: GraphQLString },
+    streaming: { type: GraphQLFloat },
+    streamingAdditional: { type: GraphQLString },
     travel: { type: GraphQLFloat },
     travelAdditional: { type: GraphQLString },
     furnitures: { type: GraphQLFloat },
@@ -34,6 +39,16 @@ const CardType = new GraphQLObjectType({
     desc: { type: GraphQLString },
     website: { type: GraphQLString },
     annual: { type: GraphQLFloat }
+  })
+});
+
+const CategoryType = new GraphQLObjectType({
+  name: 'Category',
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    detail: { type: GraphQLString },
+    merchant: { type: GraphQLList(GraphQLString) }
   })
 });
 
@@ -66,6 +81,13 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(CardType),
       resolve() {
         return Card.find({});
+      }
+    },
+    Category: {
+      type: CategoryType,
+      args: { name: { type: new GraphQLNonNull(GraphQLString) } },
+      resolve(parent, args) {
+        return Category.findOne({ name: args.name });
       }
     }
     //   author: {
@@ -136,6 +158,22 @@ const Mutation = new GraphQLObjectType({
       //         });
       //         return book.save();
       //       }
+    },
+    addCategory: {
+      type: CategoryType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        detail: { type: new GraphQLNonNull(GraphQLString) },
+        merchant: { type: new GraphQLList(GraphQLString) }
+      },
+      resolve(parent, args) {
+        const category = new Category({
+          name: args.name,
+          detail: args.detail,
+          merchant: args.merchant
+        });
+        return category.save();
+      }
     }
   }
 });

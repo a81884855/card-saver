@@ -15,6 +15,10 @@ function readRow(cardInfo) {
     restaurantadditional,
     online,
     onlineadditional,
+    grocery,
+    groceryadditional,
+    streaming,
+    streamingadditional,
     travel,
     traveladditional,
     furnitures,
@@ -39,6 +43,10 @@ function readRow(cardInfo) {
       restaurantAdditional: restaurantadditional,
       online,
       onlineAdditional: onlineadditional,
+      grocery,
+      groceryAdditional: groceryadditional,
+      streaming,
+      streamingAdditional: streamingadditional,
       travel,
       travelAdditional: traveladditional,
       furnitures,
@@ -53,7 +61,8 @@ function readRow(cardInfo) {
     },
     {
       new: true,
-      upsert: true
+      upsert: true,
+      useUnifiedTopology: true
     }
   )
     .then(res => console.log(res))
@@ -61,7 +70,7 @@ function readRow(cardInfo) {
 }
 
 async function seed() {
-  const doc = new GoogleSpreadsheet(config.GoogleSpreadsheet);
+  const doc = new GoogleSpreadsheet(config.googleSpreadSheet);
   await promisify(doc.useServiceAccountAuth)(creds);
   const info = await promisify(doc.getInfo)();
   const sheet = info.worksheets[0];

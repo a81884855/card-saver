@@ -10,6 +10,10 @@ const getCardsQuery = gql`
       gasAdditional
       restaurant
       restaurantAdditional
+      grocery
+      groceryAdditional
+      streaming
+      streamingAdditional
       online
       onlineAdditional
       travel
@@ -37,7 +41,13 @@ const getCardQuery = gql`
       gasAdditional
       restaurant
       restaurantAdditional
+      grocery
+      groceryAdditional
+      streaming
+      streamingAdditional
+      online
       onlineAdditional
+      travel
       travelAdditional
       furnitures
       furnituresAdditional
@@ -45,8 +55,43 @@ const getCardQuery = gql`
       utilitiesAdditional
       phone
       phoneAdditional
+      desc
+      website
+      annual
+    }
+  }
+`;
+
+const getCategoryQuery = gql`
+  query($name: String!) {
+    Category(name: $name) {
+      id
+      name
+      detail
+      merchant
+    }
+    Cards {
+      id
+      name
+      image
+      gas
+      gasAdditional
+      restaurant
+      restaurantAdditional
+      streaming
+      streamingAdditional
+      grocery
+      groceryAdditional
       online
+      onlineAdditional
       travel
+      travelAdditional
+      furnitures
+      furnituresAdditional
+      utilities
+      utilitiesAdditional
+      phone
+      phoneAdditional
       desc
       website
       annual
@@ -82,4 +127,4 @@ const getBookQuery = gql`
   }
 `;
 
-export { getCardsQuery, getCardQuery, addBookMutation, getBookQuery };
+export { getCardsQuery, getCardQuery, getCategoryQuery, addBookMutation, getBookQuery };
