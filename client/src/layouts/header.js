@@ -1,13 +1,12 @@
 import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { IoIosCard } from 'react-icons/io';
+import { Navbar, Nav, Container, Image } from 'react-bootstrap';
 
 export default function Header() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/">
-          <IoIosCard style={{ fontSize: 'larger', marginRight: '5px' }} />
+          <Image src="/apple-touch-icon.png" style={{ width: '30px', marginRight: '5px' }} />
           Super Card Saver
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
