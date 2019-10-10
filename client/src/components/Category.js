@@ -35,10 +35,10 @@ export class Category extends Component {
           return b[`${category}`] - a[`${category}`];
         }
       })
-        .slice(0, 10)
+        .slice(0, 8)
         .map(card => {
           return (
-            <ScrollAnimation key={card.id} animateIn="fadeIn" animateOnce={true}>
+            <ScrollAnimation key={card.name} animateIn="fadeIn" animateOnce={true}>
               <Card card={card} category={category} />
             </ScrollAnimation>
           );
@@ -114,7 +114,7 @@ const Card = props => {
   return (
     <li
       className={hovered ? 'pulse animated ' : ''}
-      style={{ marginTop: '8px' }}
+      style={{ marginBottom: '18px' }}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
     >
