@@ -68,7 +68,7 @@ export class Card extends Component {
               </ul>
               <h3>Card Detail: </h3>
               {Card.desc.split('\n').map(p => (
-                <p>{p}</p>
+                <p key={p}>{p}</p>
               ))}
               <h3>Annual Fee: </h3>
               <p>${Card.annual}</p>
