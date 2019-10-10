@@ -56,7 +56,7 @@ export class Home extends Component {
                 onClick={e => this.setState({ category: 'grocery' })}
               >
                 <MdLocalGroceryStore />
-                <span>Grocery / Super Market</span>
+                <span>Grocery</span>
               </button>
             </Col>
             <Col xs={4} className="categories">
