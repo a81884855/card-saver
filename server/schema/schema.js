@@ -1,6 +1,7 @@
 const graphql = require('graphql');
 const Card = require('../models/card');
 const Category = require('../models/category');
+const Comment = require('../models/comment');
 
 const {
   GraphQLObjectType,
@@ -52,20 +53,14 @@ const CategoryType = new GraphQLObjectType({
   })
 });
 
-// const AuthorType = new GraphQLObjectType({
-//   name: 'Author',
-//   fields: () => ({
-//     id: { type: GraphQLID },
-//     name: { type: GraphQLString },
-//     age: { type: GraphQLInt },
-//     books: {
-//       type: new GraphQLList(BookType),
-//       resolve(parent, args) {
-//         return Book.find({ authorId: parent.id });
-//       }
-//     }
-//   })
-// });
+const CommentType = new GraphQLObjectType({
+  name: 'Comment',
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    content: { type: GraphQLString }
+  })
+});
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -90,25 +85,6 @@ const RootQuery = new GraphQLObjectType({
         return Category.findOne({ name: args.name });
       }
     }
-    //   author: {
-    //     type: AuthorType,
-    //     args: { id: { type: GraphQLID } },
-    //     resolve(parent, args) {
-    //       return Author.findById(args.id);
-    //     }
-    //   },
-    //   books: {
-    //     type: new GraphQLList(BookType),
-    //     resolve(parent, args) {
-    //       return Book.find({});
-    //     }
-    //   },
-    //   authors: {
-    //     type: new GraphQLList(AuthorType),
-    //     resolve(parent, args) {
-    //       return Author.find({});
-    //     }
-    //   }
   }
 });
 
@@ -142,22 +118,6 @@ const Mutation = new GraphQLObjectType({
         });
         return card.save();
       }
-      //     },
-      //     addBook: {
-      //       type: BookType,
-      //       args: {
-      //         name: { type: new GraphQLNonNull(GraphQLString) },
-      //         genre: { type: new GraphQLNonNull(GraphQLString) },
-      //         authorId: { type: new GraphQLNonNull(GraphQLID) }
-      //       },
-      //       resolve(parent, args) {
-      //         let book = new Book({
-      //           name: args.name,
-      //           genre: args.genre,
-      //           authorId: args.authorId
-      //         });
-      //         return book.save();
-      //       }
     },
     addCategory: {
       type: CategoryType,
@@ -173,6 +133,20 @@ const Mutation = new GraphQLObjectType({
           merchant: args.merchant
         });
         return category.save();
+      }
+    },
+    addComment: {
+      type: CommentType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        content: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        const comment = new Comment({
+          title: args.title,
+          content: args.content
+        });
+        return comment.save();
       }
     }
   }
