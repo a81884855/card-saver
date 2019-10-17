@@ -5,6 +5,7 @@ import Layout from './layouts/layout';
 import Home from './components/Home';
 import Card from './components/Card';
 import NotFound from './components/NotFound';
+import Calculator from './components/Calculator';
 
 function App() {
   return (
@@ -16,7 +17,6 @@ function App() {
           render={() => (
             <Layout>
               <Home />
-              {/* <AllCards /> */}
             </Layout>
           )}
         />
@@ -34,6 +34,15 @@ function App() {
           render={props => (
             <Layout>
               <AllCards {...props} />
+            </Layout>
+          )}
+        />
+        <Route
+          path="/calculator"
+          exact
+          render={props => (
+            <Layout>
+              <Calculator {...props} />
             </Layout>
           )}
         />
