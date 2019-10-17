@@ -41,7 +41,7 @@ export class FooterPage extends Component {
           style={{
             height: 350,
             marginTop: 50,
-            padding: 25,
+            padding: 38,
             background: '#4B515D',
             color: '#ffffff'
           }}
@@ -49,7 +49,7 @@ export class FooterPage extends Component {
           <Container>
             <Row className="justify-content-md-center">
               {!commentSent ? (
-                <Col md={6}>
+                <Col md={5} sm={11}>
                   <Form noValidate validated={validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="title">
                       <Form.Label>Comment</Form.Label>
@@ -68,7 +68,7 @@ export class FooterPage extends Component {
                         required
                         as="textarea"
                         rows="3"
-                        placeholder="Anything you want to talk me?"
+                        placeholder="Anything you want to tell me?"
                         value={content}
                         onChange={e => this.setState({ content: e.target.value })}
                       />
