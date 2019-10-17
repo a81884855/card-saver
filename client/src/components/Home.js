@@ -30,7 +30,8 @@ export class Home extends Component {
     const { category } = this.state;
     return (
       <Row>
-        <Col sm={11} md={5}>
+        <Col sm={12} lg={5}>
+          <h1 style={{ textAlign: 'center' }}>Merchant Category</h1>
           <Row style={{ margin: '0 auto 10px', width: '95%' }}>
             <Col xs={4} className="categories">
               <button
@@ -115,11 +116,7 @@ export class Home extends Component {
             </Col>
           </Row>
         </Col>
-        <Col
-          style={{
-            background: 'aliceblue'
-          }}
-        >
+        <Col style={{ background: 'aliceblue' }}>
           <Category data={data} category={category} />
         </Col>
       </Row>
