@@ -2,10 +2,9 @@ import React from 'react';
 import AllCards from './components/AllCards';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Layout from './layouts/layout';
-import Home from './components/Home';
-import Card from './components/Card';
+import Categories from './components/Categories';
 import NotFound from './components/NotFound';
-import Calculator from './components/Calculator';
+import Calculator from './components/Calculator/';
 
 function App() {
   return (
@@ -16,15 +15,16 @@ function App() {
           exact
           render={() => (
             <Layout>
-              <Home />
+              <Categories />
             </Layout>
           )}
         />
         <Route
-          path="/cards/:name"
-          render={props => (
+          path="/category"
+          exact
+          render={() => (
             <Layout>
-              <Card {...props} />
+              <Categories />
             </Layout>
           )}
         />
