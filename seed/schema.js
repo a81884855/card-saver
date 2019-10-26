@@ -28,6 +28,10 @@ const cardSchema = new Schema({
     type: String,
     default: ''
   },
+  gasLimit: {
+    type: Number,
+    default: 10000
+  },
   restaurant: {
     type: Number,
     default: 1
@@ -35,6 +39,10 @@ const cardSchema = new Schema({
   restaurantAdditional: {
     type: String,
     default: ''
+  },
+  restaurantLimit: {
+    type: Number,
+    default: 10000
   },
   online: {
     type: Number,
@@ -44,6 +52,10 @@ const cardSchema = new Schema({
     type: String,
     default: ''
   },
+  onlineLimit: {
+    type: Number,
+    default: 10000
+  },
   grocery: {
     type: Number,
     default: 1
@@ -51,6 +63,10 @@ const cardSchema = new Schema({
   groceryAdditional: {
     type: String,
     default: ''
+  },
+  groceryLimit: {
+    type: Number,
+    default: 10000
   },
   streaming: {
     type: Number,
@@ -60,6 +76,10 @@ const cardSchema = new Schema({
     type: String,
     default: ''
   },
+  streamingLimit: {
+    type: Number,
+    default: 10000
+  },
   travel: {
     type: Number,
     default: 1
@@ -67,6 +87,10 @@ const cardSchema = new Schema({
   travelAdditional: {
     type: String,
     default: ''
+  },
+  travelLimit: {
+    type: Number,
+    default: 10000
   },
   furnitures: {
     type: Number,
@@ -76,6 +100,10 @@ const cardSchema = new Schema({
     type: String,
     default: ''
   },
+  furnituresLimit: {
+    type: Number,
+    default: 10000
+  },
   utilities: {
     type: Number,
     default: 1
@@ -83,6 +111,10 @@ const cardSchema = new Schema({
   utilitiesAdditional: {
     type: String,
     default: ''
+  },
+  utilitiesLimit: {
+    type: Number,
+    default: 10000
   },
   phone: {
     type: Number,
@@ -92,11 +124,15 @@ const cardSchema = new Schema({
     type: String,
     default: ''
   },
+  phoneLimit: {
+    type: Number,
+    default: 10000
+  },
   desc: String,
   website: String,
   annual: {
     type: Number,
-    default: 1
+    default: 0
   }
 });
 

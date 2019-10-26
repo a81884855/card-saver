@@ -21,22 +21,31 @@ const CardType = new GraphQLObjectType({
     image: { type: GraphQLString },
     gas: { type: GraphQLFloat },
     gasAdditional: { type: GraphQLString },
+    gasLimit: { type: GraphQLFloat },
     restaurant: { type: GraphQLFloat },
     restaurantAdditional: { type: GraphQLString },
+    restaurantLimit: { type: GraphQLFloat },
     grocery: { type: GraphQLFloat },
     groceryAdditional: { type: GraphQLString },
+    groceryLimit: { type: GraphQLFloat },
     online: { type: GraphQLFloat },
     onlineAdditional: { type: GraphQLString },
+    onlineLimit: { type: GraphQLFloat },
     streaming: { type: GraphQLFloat },
     streamingAdditional: { type: GraphQLString },
+    streamingLimit: { type: GraphQLFloat },
     travel: { type: GraphQLFloat },
     travelAdditional: { type: GraphQLString },
+    travelLimit: { type: GraphQLFloat },
     furnitures: { type: GraphQLFloat },
     furnituresAdditional: { type: GraphQLString },
+    furnituresLimit: { type: GraphQLFloat },
     utilities: { type: GraphQLFloat },
     utilitiesAdditional: { type: GraphQLString },
+    utilitiesLimit: { type: GraphQLFloat },
     phone: { type: GraphQLFloat },
     phoneAdditional: { type: GraphQLString },
+    phoneLimit: { type: GraphQLFloat },
     desc: { type: GraphQLString },
     website: { type: GraphQLString },
     annual: { type: GraphQLFloat }
@@ -91,50 +100,50 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    addCard: {
-      type: CardType,
-      args: {
-        name: { type: new GraphQLNonNull(GraphQLString) },
-        image: { type: new GraphQLNonNull(GraphQLString) },
-        gasReward: { type: GraphQLFloat },
-        gasRewardAdditional: { type: GraphQLString },
-        restaurantReward: { type: GraphQLFloat },
-        onlineReward: { type: GraphQLFloat },
-        travelReward: { type: GraphQLFloat },
-        desc: { type: new GraphQLNonNull(GraphQLString) },
-        website: { type: new GraphQLNonNull(GraphQLString) }
-      },
-      resolve(parent, args) {
-        const card = new Card({
-          name: args.name,
-          image: args.image,
-          gasReward: args.gasReward,
-          gasRewardAdditional: args.gasRewardAdditional,
-          restaurantReward: args.restaurantReward,
-          onlineReward: args.onlineReward,
-          travelReward: args.travelReward,
-          desc: args.desc,
-          website: args.website
-        });
-        return card.save();
-      }
-    },
-    addCategory: {
-      type: CategoryType,
-      args: {
-        name: { type: new GraphQLNonNull(GraphQLString) },
-        detail: { type: new GraphQLNonNull(GraphQLString) },
-        merchant: { type: new GraphQLList(GraphQLString) }
-      },
-      resolve(parent, args) {
-        const category = new Category({
-          name: args.name,
-          detail: args.detail,
-          merchant: args.merchant
-        });
-        return category.save();
-      }
-    },
+    // addCard: {
+    //   type: CardType,
+    //   args: {
+    //     name: { type: new GraphQLNonNull(GraphQLString) },
+    //     image: { type: new GraphQLNonNull(GraphQLString) },
+    //     gasReward: { type: GraphQLFloat },
+    //     gasRewardAdditional: { type: GraphQLString },
+    //     restaurantReward: { type: GraphQLFloat },
+    //     onlineReward: { type: GraphQLFloat },
+    //     travelReward: { type: GraphQLFloat },
+    //     desc: { type: new GraphQLNonNull(GraphQLString) },
+    //     website: { type: new GraphQLNonNull(GraphQLString) }
+    //   },
+    //   resolve(parent, args) {
+    //     const card = new Card({
+    //       name: args.name,
+    //       image: args.image,
+    //       gasReward: args.gasReward,
+    //       gasRewardAdditional: args.gasRewardAdditional,
+    //       restaurantReward: args.restaurantReward,
+    //       onlineReward: args.onlineReward,
+    //       travelReward: args.travelReward,
+    //       desc: args.desc,
+    //       website: args.website
+    //     });
+    //     return card.save();
+    //   }
+    // },
+    // addCategory: {
+    //   type: CategoryType,
+    //   args: {
+    //     name: { type: new GraphQLNonNull(GraphQLString) },
+    //     detail: { type: new GraphQLNonNull(GraphQLString) },
+    //     merchant: { type: new GraphQLList(GraphQLString) }
+    //   },
+    //   resolve(parent, args) {
+    //     const category = new Category({
+    //       name: args.name,
+    //       detail: args.detail,
+    //       merchant: args.merchant
+    //     });
+    //     return category.save();
+    //   }
+    // },
     addComment: {
       type: CommentType,
       args: {

@@ -8,22 +8,31 @@ const getCardsQuery = gql`
       image
       gas
       gasAdditional
+      gasLimit
       restaurant
       restaurantAdditional
+      restaurantLimit
       grocery
       groceryAdditional
+      groceryLimit
       streaming
       streamingAdditional
+      streamingLimit
       online
       onlineAdditional
+      onlineLimit
       travel
       travelAdditional
+      travelLimit
       furnitures
       furnituresAdditional
+      furnituresLimit
       utilities
       utilitiesAdditional
+      utilitiesLimit
       phone
       phoneAdditional
+      phoneLimit
       desc
       website
       annual
@@ -39,22 +48,31 @@ const getCardQuery = gql`
       image
       gas
       gasAdditional
+      gasLimit
       restaurant
       restaurantAdditional
+      restaurantLimit
       grocery
       groceryAdditional
+      groceryLimit
       streaming
       streamingAdditional
+      streamingLimit
       online
       onlineAdditional
+      onlineLimit
       travel
       travelAdditional
+      travelLimit
       furnitures
       furnituresAdditional
+      furnituresLimit
       utilities
       utilitiesAdditional
+      utilitiesLimit
       phone
       phoneAdditional
+      phoneLimit
       desc
       website
       annual
@@ -76,22 +94,31 @@ const getCategoryQuery = gql`
       image
       gas
       gasAdditional
+      gasLimit
       restaurant
       restaurantAdditional
-      streaming
-      streamingAdditional
+      restaurantLimit
       grocery
       groceryAdditional
+      groceryLimit
+      streaming
+      streamingAdditional
+      streamingLimit
       online
       onlineAdditional
+      onlineLimit
       travel
       travelAdditional
+      travelLimit
       furnitures
       furnituresAdditional
+      furnituresLimit
       utilities
       utilitiesAdditional
+      utilitiesLimit
       phone
       phoneAdditional
+      phoneLimit
       desc
       website
       annual
