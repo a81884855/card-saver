@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { getCardsQuery } from '../queries/queries.js';
 import { Helmet } from 'react-helmet';
-import { Col, Row, Image, Modal, Button } from 'react-bootstrap';
-import CardDetail from './CardDetail';
+import { Col, Row, Image, Modal, Button, Container } from 'react-bootstrap';
+import CardDetail from './Category/CardDetail';
 import 'animate.css/animate.min.css';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const head = () => {
   return (
@@ -36,7 +37,7 @@ export class CardList extends Component {
   displayCards = props => {
     let data = props.data;
     if (data.loading) {
-      return <div>Loading card detail...</div>;
+      return <CircularProgress />;
     } else {
       return data.Cards.map(card => {
         return <Card key={card.id} card={card} handleShow={this.handleShow} />;
@@ -47,7 +48,7 @@ export class CardList extends Component {
   render() {
     const { show, name, website } = this.state;
     return (
-      <>
+      <Container style={{ margin: '1rem auto', minHeight: '100vh' }}>
         <Modal
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
@@ -76,7 +77,7 @@ export class CardList extends Component {
           {head()}
           {this.displayCards(this.props)}
         </Row>
-      </>
+      </Container>
     );
   }
 }
