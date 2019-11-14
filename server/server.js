@@ -14,9 +14,9 @@ mongoose.connect(config.url, {
   useNewUrlParser: true
 });
 
-mongoose.connection.once('open', () => {
-  console.log('connected to database');
-});
+// mongoose.connection.once('open', () => {
+//   console.log('connected to database');
+// });
 
 app.use(
   '/graphql',
