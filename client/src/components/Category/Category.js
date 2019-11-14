@@ -2,9 +2,10 @@ import React from 'react';
 import { Row, Col, Container, Jumbotron } from 'react-bootstrap';
 import ScrollAnimation from 'react-animate-on-scroll';
 import { graphql } from 'react-apollo';
-import { getCategoryQuery } from '../queries/queries.js';
-import displayIcon from '../assets/helper/displayIcon';
+import { getCategoryQuery } from '../../queries/queries.js';
+import displayIcon from '../../assets/helper/displayIcon';
 import Card from './Card';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export function Category(props) {
   const displayCards = props => {
@@ -33,7 +34,7 @@ export function Category(props) {
   const displayCategoryHead = props => {
     let { data, category } = props;
     if (data.loading) {
-      return <div>Loading cards...</div>;
+      return <CircularProgress />;
     } else {
       const { Category } = props.data;
       return (
@@ -43,7 +44,7 @@ export function Category(props) {
               <span style={{ fontSize: 'larger', margin: '-3px 3px' }}>
                 {displayIcon(category)}
               </span>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
+              <span style={{ textTransform: 'capitalize' }}>{category}</span>
             </h3>
             <p>{Category.detail}</p>
             <p style={{ fontSize: '12px' }}>

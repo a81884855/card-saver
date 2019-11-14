@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Container, Image } from 'react-bootstrap';
-import { getCardQuery } from '../queries/queries.js';
+import { getCardQuery } from '../../queries/queries.js';
 import { graphql } from 'react-apollo';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export class CardDetail extends Component {
   displayCard() {
     let { data } = this.props;
     let { Card } = data;
     if (data.loading) {
-      return <div>Loading cards...</div>;
+      return <CircularProgress />;
     } else {
       return (
         <div>
