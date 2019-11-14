@@ -6,13 +6,12 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function DonutChart(props) {
   let saving = 0;
-  let annualCards = {};
   props.chosen.forEach(category => {
     if (props[`${category}Saving`]) saving += props[`${category}Saving`];
-    if (!annualCards[props[`${category}Card`]]) {
-      annualCards[props[`${category}Card`]] = true;
-      saving -= (props[`${category}Annual`] / 3) | 0;
-    }
+    // if (!annualCards[props[`${category}Card`]]) {
+    //   annualCards[props[`${category}Card`]] = true;
+    //   saving -= (props[`${category}Annual`] / 3) | 0;
+    // }
   });
 
   const savingDataPoints = [];
