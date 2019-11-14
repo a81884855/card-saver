@@ -40,7 +40,7 @@ export class FooterPage extends Component {
         <div
           style={{
             height: 350,
-            marginTop: 50,
+            // marginTop: 50,
             padding: 38,
             background: '#4B515D',
             color: '#ffffff'
