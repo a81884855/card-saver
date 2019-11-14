@@ -15,6 +15,7 @@ import displayIcon from '../../assets/helper/displayIcon';
 import ClearIcon from '@material-ui/icons/Clear';
 import { graphql } from 'react-apollo';
 import { getCardsQuery } from '../../queries/queries.js';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({
   root: {
@@ -64,7 +65,7 @@ export function CustomSlider(props) {
   const displayCards = category => {
     let data = props.data;
     if (data.loading) {
-      return <div>Loading cards...</div>;
+      return <CircularProgress />;
     } else {
       return data.Cards.sort((a, b) => b[category] - a[category])
         .slice(0, 6)
@@ -127,7 +128,7 @@ export function CustomSlider(props) {
         <span style={{ color: '#388e3c', fontWeight: 'bold' }}>
           {props.saving && `$${Math.round(props.saving / 3)}/month  `}
         </span>
-        {props.annual && `($${props.annual} Annual Fee)`}
+        {props.annual > 0 && `($${props.annual} Annual Fee)`}
       </span>
       <Grid container spacing={2} alignItems="center">
         <Grid item style={{ fontSize: '1.6rem', marginTop: -2 }}>

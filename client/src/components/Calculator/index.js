@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CustomSlider from './Slider';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { MenuItem, Button, Menu, Paper, Divider } from '@material-ui/core';
 import DonutChart from './DonutChart';
 import displayIcon from '../../assets/helper/displayIcon';
@@ -59,8 +59,10 @@ export class Calculator extends Component {
   }
 
   handleInputChange(category, value) {
+    console.log(category, value);
     this.setState({
-      [category]: value
+      [category]: value,
+      [`${category}Saving`]: this.state[`${category}Reward`] * value * 3
     });
   }
 
@@ -89,7 +91,8 @@ export class Calculator extends Component {
   handleBlur(category) {
     if (this.state[category] > 5000) {
       this.setState({
-        [category]: 5000
+        [category]: 5000,
+        [`${category}Saving`]: 5000 * this.state[`${category}Reward`] * 3
       });
     } else if (this.state[category] < 0) {
       this.setState({
@@ -101,68 +104,70 @@ export class Calculator extends Component {
   render() {
     const { chosen, other, anchorEl } = this.state;
     return (
-      <Row style={{ marginTop: 50 }}>
-        <Col sm={12} lg={5} style={{ marginBottom: 40 }}>
-          <DonutChart {...this.state} />
-        </Col>
-        <Col sm={12} lg={7} style={{ margin: '5px auto' }}>
-          <Paper style={{ padding: '1.5rem 2.5rem 2.5rem 1.5rem' }}>
-            <Row>
-              <Col sm={7} md={7}>
-                <h3>Monthly Spending</h3>
-              </Col>
-              <Col sm={5} md={5} style={{ textAlign: 'right' }}>
-                <Button
-                  style={{ margin: 0 }}
-                  variant="contained"
-                  color="primary"
-                  aria-controls="simple-menu"
-                  aria-haspopup="true"
-                  onClick={this.handleClick}
-                >
-                  Add Category
-                </Button>
-                <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={this.handleClose}
-                >
-                  {other.map(category => (
-                    <MenuItem
-                      key={category}
-                      value={category}
-                      onClick={() => this.handlerAdd(category)}
-                    >
-                      {displayIcon(category)}
-                      <span className="ml-2" style={{ textTransform: 'capitalize' }}>
-                        {category}
-                      </span>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Col>
-            </Row>
-            {chosen.map(category => (
-              <div key={category}>
-                <CustomSlider
-                  category={category}
-                  reward={this.state[`${category}Reward`]}
-                  saving={this.state[`${category}Saving`]}
-                  annual={this.state[`${category}Annual`]}
-                  value={this.state[category]}
-                  handleCardChange={this.handleCardChange}
-                  handleSliderChange={this.handleSliderChange}
-                  handleInputChange={this.handleInputChange}
-                  handleBlur={this.handleBlur}
-                />
-                <Divider />
-              </div>
-            ))}
-          </Paper>
-        </Col>
-      </Row>
+      <Container style={{ margin: '1rem auto', minHeight: '100vh' }}>
+        <Row style={{ marginTop: 50 }}>
+          <Col sm={12} lg={5} style={{ marginBottom: 40 }}>
+            <DonutChart {...this.state} />
+          </Col>
+          <Col sm={12} lg={7} style={{ margin: '5px auto' }}>
+            <Paper style={{ padding: '1.5rem 2.5rem 2.5rem 1.5rem' }}>
+              <Row style={{ marginBottom: 10 }}>
+                <Col sm={7} md={7}>
+                  <h2>Monthly Spending</h2>
+                </Col>
+                <Col sm={5} md={5} style={{ textAlign: 'right' }}>
+                  <Button
+                    style={{ margin: 5 }}
+                    variant="contained"
+                    color="primary"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={this.handleClick}
+                  >
+                    Add Category
+                  </Button>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={this.handleClose}
+                  >
+                    {other.map(category => (
+                      <MenuItem
+                        key={category}
+                        value={category}
+                        onClick={() => this.handlerAdd(category)}
+                      >
+                        {displayIcon(category)}
+                        <span className="ml-2" style={{ textTransform: 'capitalize' }}>
+                          {category}
+                        </span>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Col>
+              </Row>
+              {chosen.map(category => (
+                <div key={category}>
+                  <CustomSlider
+                    category={category}
+                    reward={this.state[`${category}Reward`]}
+                    saving={this.state[`${category}Saving`]}
+                    annual={this.state[`${category}Annual`]}
+                    value={this.state[category]}
+                    handleCardChange={this.handleCardChange}
+                    handleSliderChange={this.handleSliderChange}
+                    handleInputChange={this.handleInputChange}
+                    handleBlur={this.handleBlur}
+                  />
+                  <Divider />
+                </div>
+              ))}
+            </Paper>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
