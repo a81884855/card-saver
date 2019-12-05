@@ -16,11 +16,11 @@ export default function DonutChart(props) {
 
   const savingDataPoints = [];
   for (let category of props.chosen) {
-    if (props[`${category}`] > 0) {
+    if (props[category] > 0) {
       savingDataPoints.push({
         name: category,
-        d: Math.round(props[`${category}`] * 3 * props[`${category}Reward`]),
-        y: Math.round((props[`${category}`] * props[`${category}Reward`] * 300) / saving),
+        d: Math.round(props[`${category}`] * 12 * props[`${category}Reward`]),
+        y: Math.round((props[`${category}`] * props[`${category}Reward`] * 1200) / saving),
         p: props[`${category}Reward`] / 100
       });
     }
@@ -29,11 +29,11 @@ export default function DonutChart(props) {
   const savingOptions = {
     animationEnabled: true,
     title: {
-      text: 'Potential Quarterly Saving'
+      text: 'Potential Annual Saving'
     },
     subtitles: [
       {
-        text: `$${Math.round(saving)}/qtr`,
+        text: `$${Math.round(saving)}/yr`,
         verticalAlign: 'center',
         fontSize: 24,
         dockInsidePlotArea: true
