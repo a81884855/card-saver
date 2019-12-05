@@ -7,11 +7,11 @@ import ScrollAnimation from 'react-animate-on-scroll';
 export default function Home() {
   return (
     <div style={{ background: '#333' }}>
-      <header class="showcase">
-        <div class="content">
-          <div class="title">Find the best Credit Card</div>
-          <div class="text">Earn on every dollar you spend</div>
-          <Button variant="primary" size="lg" style={{ marginTop: 30 }}>
+      <header className="showcase">
+        <div className="content">
+          <div className="title">Find the best Credit Card</div>
+          <div className="text">Earn on every dollar you spend</div>
+          <Button href="/card-picker" variant="primary" size="lg" style={{ marginTop: 30 }}>
             Explore
           </Button>
         </div>
