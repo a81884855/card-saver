@@ -61,13 +61,13 @@ const PrettoSlider = withStyles({
 
 export function CustomSlider(props) {
   const [card, setCard] = useState('');
-
-  const displayCards = category => {
+  const { category, value, saving, reward, limit } = props;
+  const displayCards = categoryName => {
     let data = props.data;
     if (data.loading) {
       return <CircularProgress />;
     } else {
-      return data.Cards.sort((a, b) => b[category] - a[category])
+      return data.Cards.sort((a, b) => b[categoryName] - a[categoryName])
         .slice(0, 6)
         .map(card => {
           return (
@@ -76,9 +76,9 @@ export function CustomSlider(props) {
               value={
                 card.name +
                 '/' +
-                card[category] +
+                card[categoryName] +
                 '/' +
-                card[`${category}Limit`] +
+                card[`${categoryName}Limit`] +
                 '/' +
                 card.annual
               }
@@ -92,7 +92,12 @@ export function CustomSlider(props) {
                   marginRight: 5
                 }}
               />
-              {' ' + card[category]}%{' ' + card.name}
+              {' ' + card[categoryName]}%{' ' + card.name}
+              {card[`${categoryName}Limit`] <= 2000 &&
+                ` (Quarterly Limit: ${card[`${categoryName}Limit`]})`}
+              {card[`${categoryName}Limit`] >= 2000 &&
+                card[`${categoryName}Limit`] <= 10000 &&
+                ` (Quarterly Limit: ${card[`${categoryName}Limit`] / 4})`}
             </MenuItem>
           );
         });
@@ -102,52 +107,52 @@ export function CustomSlider(props) {
   const classes = useStyles();
 
   const handleSliderChange = (event, newValue) => {
-    props.handleSliderChange(props.category, newValue);
+    props.handleSliderChange(category, newValue);
   };
 
   const handleInputChange = event => {
-    props.handleInputChange(
-      props.category,
-      event.target.value === '' ? '' : Number(event.target.value)
-    );
+    props.handleInputChange(category, event.target.value === '' ? '' : Number(event.target.value));
   };
 
   const handleBlur = () => {
-    props.handleBlur(props.category);
+    props.handleBlur(category);
   };
 
   const handleCardChange = e => {
-    props.handleCardChange(props.category, e.target.value);
+    props.handleCardChange(category, e.target.value);
     setCard(e.target.value);
   };
 
   return (
     <div className={classes.root}>
-      <span style={{ textTransform: 'capitalize' }}>
-        {props.category} reward:
+      <span style={{ textTransform: 'capitalize', marginBottom: 3 }}>
+        {category} reward:
         <span style={{ color: '#388e3c', fontWeight: 'bold' }}>
-          {props.saving && `$${Math.round(props.saving / 3)}/month  `}
+          {saving && `$${Math.round(props.saving / 12)}/month  `}
         </span>
-        {props.annual > 0 && `($${props.annual} Annual Fee)`}
+        {/* {props.annual > 0 && `($${props.annual} Annual Fee)`} */}
+        <span style={{ color: 'tomato' }}>
+          {limit < 100000 && `(Only first $${limit} purchase get ${reward * 100}%)`}
+        </span>
       </span>
-      <Grid container spacing={2} alignItems="center">
+      <Grid container spacing={2} alignItems="center" style={{ margin: 0 }}>
         <Grid item style={{ fontSize: '1.6rem', marginTop: -2 }}>
-          {displayIcon(props.category)}
+          {displayIcon(category)}
         </Grid>
-        <Grid item xs id={props.category}>
+        <Grid item xs id={category}>
           <PrettoSlider
-            id={props.category}
-            value={props.value}
+            id={category}
+            value={value}
             onChange={handleSliderChange}
             aria-label="pretto slider"
-            max={5000}
+            max={10000}
             step={100}
           />
         </Grid>
         <Grid item style={{ marginTop: -5 }}>
           <Input
             className={classes.input}
-            value={props.value}
+            value={value}
             style={{ width: '100%' }}
             margin="dense"
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -161,7 +166,7 @@ export function CustomSlider(props) {
             inputProps={{
               step: 100,
               min: 0,
-              max: 5000,
+              max: 10000,
               type: 'number',
               'aria-labelledby': 'input-slider'
             }}
@@ -169,9 +174,9 @@ export function CustomSlider(props) {
         </Grid>
         <Grid item xs={3}>
           <FormControl style={{ width: '100%' }} variant="outlined" className={classes.formControl}>
-            <InputLabel>{props.reward * 100}% Card</InputLabel>
+            <InputLabel>{reward * 100}% Card</InputLabel>
             <Select value={card} onChange={handleCardChange}>
-              {displayCards(props.category)}
+              {displayCards(category)}
               <MenuItem value="/2//">2% Credit Card</MenuItem>
               <MenuItem value="/1//">1% Credit Card</MenuItem>
             </Select>

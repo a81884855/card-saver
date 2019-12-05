@@ -11,13 +11,13 @@ export class Calculator extends Component {
     this.state = {
       restaurant: 500,
       restaurantReward: 0.01,
-      restaurantSaving: 15,
+      restaurantSaving: 60,
       grocery: 300,
       groceryReward: 0.01,
-      grocerySaving: 9,
+      grocerySaving: 36,
       gas: 200,
       gasReward: 0.01,
-      gasSaving: 6,
+      gasSaving: 24,
       chosen: ['restaurant', 'grocery', 'gas'],
       other: ['online', 'phone', 'travel', 'furnitures', 'streaming', 'utilities'],
       anchorEl: null
@@ -52,17 +52,24 @@ export class Calculator extends Component {
   };
 
   handleSliderChange(category, newValue) {
+    let limit = this.state[`${category}Limit`] | 0;
+    let saving = this.state[`${category}Reward`] * newValue * 12;
+    if (newValue * 12 > limit)
+      saving -= (newValue * 12 - limit) * (this.state[`${category}Reward`] - 0.01);
     this.setState({
       [category]: newValue,
-      [`${category}Saving`]: this.state[`${category}Reward`] * newValue * 3
+      [`${category}Saving`]: saving
     });
   }
 
   handleInputChange(category, value) {
-    console.log(category, value);
+    let limit = this.state[`${category}Limit`] | 0;
+    let saving = this.state[`${category}Reward`] * value * 12;
+    if (value * 12 > limit)
+      saving -= (value * 12 - limit) * (this.state[`${category}Reward`] - 0.01);
     this.setState({
       [category]: value,
-      [`${category}Saving`]: this.state[`${category}Reward`] * value * 3
+      [`${category}Saving`]: saving
     });
   }
 
@@ -70,29 +77,28 @@ export class Calculator extends Component {
     const spend = this.state[category];
     let [name, rate, limit, annual] = card.split('/');
     rate = rate / 100;
+    let annualSpend = spend * 12;
     let saving = 0;
-    if (limit > 0) {
-      if (spend < limit) {
-        saving = spend * rate * 3;
-      } else {
-        saving = (limit * rate + (spend - limit) / 100) * 3;
-      }
+    if (annualSpend > limit) {
+      saving = limit * rate + (annualSpend - limit) * 0.01;
     } else {
-      saving = spend * rate * 3;
+      saving = annualSpend * rate;
     }
+
     this.setState({
       [`${category}Card`]: name,
       [`${category}Reward`]: rate,
       [`${category}Saving`]: saving,
-      [`${category}Annual`]: annual
+      [`${category}Annual`]: annual,
+      [`${category}Limit`]: limit
     });
   }
 
   handleBlur(category) {
-    if (this.state[category] > 5000) {
+    if (this.state[category] > 10000) {
       this.setState({
-        [category]: 5000,
-        [`${category}Saving`]: 5000 * this.state[`${category}Reward`] * 3
+        [category]: 10000,
+        [`${category}Saving`]: 10000 * this.state[`${category}Reward`] * 12
       });
     } else if (this.state[category] < 0) {
       this.setState({
@@ -154,7 +160,7 @@ export class Calculator extends Component {
                     category={category}
                     reward={this.state[`${category}Reward`]}
                     saving={this.state[`${category}Saving`]}
-                    annual={this.state[`${category}Annual`]}
+                    limit={this.state[`${category}Limit`]}
                     value={this.state[category]}
                     handleCardChange={this.handleCardChange}
                     handleSliderChange={this.handleSliderChange}

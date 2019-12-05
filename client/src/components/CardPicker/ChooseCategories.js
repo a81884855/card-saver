@@ -28,8 +28,8 @@ export default function ChooseCategories(props) {
 
   return (
     <Container style={{ padding: '1rem auto' }}>
-      <h3 style={{ textAlign: 'center' }}>Select the biggest spending categories (Maxium 3 )</h3>
-      <Row xs={12} lg={6} style={{ margin: '20px auto 10px', maxWidth: 550 }}>
+      <h3 style={{ marginLeft: '1rem' }}>Select the biggest spending categories (Maxium 3 )</h3>
+      <Row xs={12} lg={6} style={{ margin: '20px 1rem 10px', maxWidth: 550 }}>
         {allCategory.map(category => (
           <Col md={2} xs={4} className="categories" key={category}>
             <button

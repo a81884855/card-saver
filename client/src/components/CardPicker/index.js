@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import { Stepper, Step, StepLabel, StepContent, Button } from '@material-ui/core';
+import {
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent,
+  Button,
+  Snackbar,
+  SnackbarContent
+} from '@material-ui/core';
 import { Container } from 'react-bootstrap';
 import Spend from './Spend';
 import ChooseCategories from './ChooseCategories';
 import Summary from './Summary';
 import Result from './Result';
+import WarningIcon from '@material-ui/icons/Warning';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 export class VerticalLinearStepper extends Component {
   constructor(props) {
@@ -12,7 +23,9 @@ export class VerticalLinearStepper extends Component {
     this.state = {
       activeStep: 0,
       selected: new Set(),
-      steps: ['Select Categories', 'Summary']
+      steps: ['Select Categories', 'Summary'],
+      open: false,
+      message: ''
     };
     this.handleNext = this.handleNext.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -23,10 +36,11 @@ export class VerticalLinearStepper extends Component {
     this.handleCategoryDetail = this.handleCategoryDetail.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleRewardBlur = this.handleRewardBlur.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleNext = () => {
-    const { activeStep, selected } = this.state;
+    const { activeStep, selected, steps } = this.state;
     if (activeStep === 0) {
       let categories = [];
       Array.from(selected).forEach(category =>
@@ -36,15 +50,42 @@ export class VerticalLinearStepper extends Component {
           [`${category}Annual`]: 0
         })
       );
-      this.setState({
-        activeStep: activeStep + 1,
-        ...categories
-      });
+      if (selected.size === 0) {
+        this.setState({
+          open: true,
+          message: 'You need to select at least one category !'
+        });
+      } else {
+        this.setState({
+          activeStep: activeStep + 1,
+          ...categories
+        });
+      }
     } else {
-      this.setState({
-        activeStep: activeStep + 1
-      });
+      if (activeStep === steps.length - 1) {
+        this.setState({
+          activeStep: activeStep + 1
+        });
+      } else if (
+        activeStep < steps.length &&
+        this.state[activeStep - 1][Array.from(selected)[activeStep - 1]] === 0
+      ) {
+        this.setState({
+          open: true,
+          message: 'Category Spending Should Larger than 0 !'
+        });
+      } else {
+        this.setState({
+          activeStep: activeStep + 1
+        });
+      }
     }
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false
+    });
   };
 
   handleBack = () => {
@@ -121,34 +162,59 @@ export class VerticalLinearStepper extends Component {
   }
 
   render() {
-    const { activeStep, steps } = this.state;
+    const { activeStep, steps, open, message } = this.state;
     return (
       <Container>
-        <div>
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((label, index) => (
-              <Step key={label}>
-                <StepLabel onClick={this.handleStep(index)}>
-                  <span style={{ textTransform: 'capitalize' }}>{label}</span>
-                </StepLabel>
-                <StepContent>
-                  {this.getStepContent(index)}
-                  <div>
-                    <div>
-                      <Button disabled={activeStep === 0} onClick={this.handleBack}>
-                        Back
-                      </Button>
-                      <Button variant="contained" color="primary" onClick={this.handleNext}>
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                      </Button>
-                    </div>
-                  </div>
-                </StepContent>
-              </Step>
-            ))}
-          </Stepper>
-          {activeStep === steps.length && <Result {...this.state} />}
-        </div>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          key={message}
+          open={open}
+          onClose={this.handleClose}
+          autoHideDuration={6000}
+        >
+          <SnackbarContent
+            message={
+              <span>
+                <WarningIcon style={{ marginRight: 10 }} />
+                {message}
+              </span>
+            }
+            style={{ backgroundColor: '#d32f2f' }}
+            action={[
+              <IconButton key="close" aria-label="close" color="inherit" onClick={this.handleClose}>
+                <CloseIcon />
+              </IconButton>
+            ]}
+          />
+        </Snackbar>
+        <Stepper activeStep={activeStep} orientation="vertical">
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel onClick={this.handleStep(index)}>
+                <span style={{ textTransform: 'capitalize' }}>{label}</span>
+              </StepLabel>
+              <StepContent>
+                {this.getStepContent(index)}
+                <Container>
+                  <Button disabled={activeStep === 0} onClick={this.handleBack}>
+                    Back
+                  </Button>
+                  <Button variant="contained" color="primary" onClick={this.handleNext}>
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </Container>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length && (
+          <Container>
+            <Button variant="contained" color="primary" onClick={this.handleReset}>
+              Reset
+            </Button>
+            <Result {...this.state} />
+          </Container>
+        )}
       </Container>
     );
   }

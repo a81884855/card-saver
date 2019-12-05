@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo';
 import { getCardsQuery } from '../../queries/queries.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Container, Row, Col, Image } from 'react-bootstrap';
+import { FaCrown } from 'react-icons/fa';
 
 export class Result extends Component {
   constructor(props) {
@@ -17,11 +18,10 @@ export class Result extends Component {
     cards.forEach(card => {
       categories.forEach((category, index) => {
         let total_reward = card[category] * 12 * this.props[index][category];
-        if (total_reward > card[`${category}Limit`]) {
-          total_reward -= (card[category] - 1) * 12 * this.props[index][category];
-        }
+        let overLimit = total_reward - card[`${category}Limit`];
+        if (overLimit > 0) total_reward -= ((card[category] - 1) / 100) * overLimit;
         total_reward = total_reward / 100 - card.annual;
-        if (!this.state[category] || (total_reward > this.state[category] || 0))
+        if (!this.state[category] || total_reward > this.state[category] || 0)
           this.setState({ [category]: total_reward, [`${category}Card`]: card });
       });
     });
@@ -39,67 +39,93 @@ export class Result extends Component {
       );
     } else {
       this.compare(data.Cards);
-      return categories.map(category => {
-        console.log(this.state);
-        return <Card key={1} card={this.state[`${category}Card`]} />;
+      return categories.map((category, index) => {
+        return (
+          <Card
+            key={category}
+            info={this.props[index]}
+            category={category}
+            card={this.state[`${category}Card`]}
+          />
+        );
       });
     }
   };
 
   render() {
-    return <Container>{this.displayResult(this.props)}</Container>;
+    return (
+      <Container>
+        <Row>{this.displayResult(this.props)}</Row>
+      </Container>
+    );
   }
 }
 
-export class Card extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hovered: false
-    };
-    this.toggleHover = this.toggleHover.bind(this);
-  }
-  toggleHover() {
-    this.setState({
-      hovered: true
-    });
-    setTimeout(() => {
-      this.setState({
-        hovered: false
-      });
-    }, 1500);
-  }
-  render() {
-    const { card } = this.props;
-    console.log(card);
-    const { hovered } = this.state;
-    return (
-      <>
-        {card && (
-          <Col
-            xs={10}
-            md={6}
-            lg={4}
-            key={card.id}
-            style={{ marginBottom: '15px' }}
-            onClick={() => this.props.handleShow(card.name, card.website)}
-          >
-            <Image
-              src={`/images/${card.image}`}
-              style={{
-                width: '100%',
-                border: 'none'
-              }}
-              onMouseEnter={this.toggleHover}
-              className={hovered ? 'flipInX animated' : ''}
-              thumbnail
-            />
-            <p style={{ textAlign: 'center' }}>{card.name}</p>
-          </Col>
-        )}
-      </>
-    );
-  }
+export function Card(props) {
+  const { card, category, info } = props;
+  return (
+    <>
+      {card && (
+        <Col
+          xs={10}
+          lg={4}
+          key={card.id}
+          style={{ margin: '10px auto 30px' }}
+          onClick={() => this.props.handleShow(card.name, card.website)}
+        >
+          <h3 style={{ textTransform: 'capitalize', textAlign: 'center' }}>{category} Card</h3>
+          <Image
+            src={`/images/${card.image}`}
+            style={{
+              width: '100%',
+              border: 'none'
+            }}
+            thumbnail
+          />
+          <p style={{ textAlign: 'center', fontSize: '1.3rem', color: 'tomato' }}>{card.name}</p>
+          <Container style={{ textAlign: 'center' }}>
+            <Row style={{ fontWeight: 700 }}>
+              <Col xs={3}>Yours</Col>
+              <Col style={{ padding: 0 }} xs={{ span: 3, offset: 6 }}>
+                Suggested
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={3}>{info[`${category}Reward`]}</Col>
+              <Col xs={6}>% Reward</Col>
+              <Col xs={3}>{card[category]}</Col>
+            </Row>
+            <Row>
+              <Col xs={3}>{info[`${category}Annual`]}</Col>
+              <Col xs={6}>Annual Fee</Col>
+              <Col xs={3}>{card.annual}</Col>
+            </Row>
+            <Row>
+              <Col xs={3}>
+                $
+                {(info[category] * info[`${category}Reward`] * 12) / 100 -
+                  info[`${category}Annual`]}
+                {(info[category] * info[`${category}Reward`] * 12) / 100 -
+                  info[`${category}Annual`] >=
+                  (info[category] * card[category] * 12) / 100 - card.annual && (
+                  <FaCrown style={{ color: 'darkorange', margin: '-5px 0 0 0' }} />
+                )}
+              </Col>
+              <Col xs={6}>Annual Saving</Col>
+              <Col xs={3}>
+                ${(info[category] * card[category] * 12) / 100 - card.annual}{' '}
+                {(info[category] * info[`${category}Reward`] * 12) / 100 -
+                  info[`${category}Annual`] <=
+                  (info[category] * card[category] * 12) / 100 - card.annual && (
+                  <FaCrown style={{ color: 'darkorange', margin: '-5px 0 0 0' }} />
+                )}
+              </Col>
+            </Row>
+          </Container>
+        </Col>
+      )}
+    </>
+  );
 }
 
 export default graphql(getCardsQuery)(Result);

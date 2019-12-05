@@ -139,9 +139,9 @@ export function Spend(props) {
 
           <Grid container style={{ margin: '10px 0 20px 5px' }}>
             <Grid item md={6} sm={10} style={{ margin: '10px 0 15px' }}>
-              <FormLabel component="legend">Credit Card Reward Rate</FormLabel>
+              <FormLabel component="legend">Your Credit Card Reward</FormLabel>
               <Grid container>
-                <Grid item xs={6} style={{ maxWidth: 170 }}>
+                <Grid item xs={7} style={{ maxWidth: 170 }}>
                   <FormControl
                     style={{ width: '100%', maxWidth: 160 }}
                     variant="outlined"
@@ -184,7 +184,7 @@ export function Spend(props) {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item style={{ margin: '10px 0 15px', maxWidth: 180 }} md={6} sm={10}>
+            <Grid item style={{ margin: '10px 0 15px', maxWidth: 180 }} md={5} sm={10}>
               <FormLabel component="legend">Annual Fee</FormLabel>
               <Input
                 className={classes.input}
