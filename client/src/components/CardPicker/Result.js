@@ -18,11 +18,13 @@ export class Result extends Component {
     cards.forEach(card => {
       categories.forEach((category, index) => {
         let total_reward = card[category] * 12 * this.props[index][category];
-        let overLimit = total_reward - card[`${category}Limit`];
-        if (overLimit > 0) total_reward -= ((card[category] - 1) / 100) * overLimit;
+        let overLimit = total_reward > card[`${category}Limit`];
+        if (overLimit)
+          total_reward -= ((card[category] - 1) / 100) * (total_reward - card[`${category}Limit`]);
         total_reward = total_reward / 100 - card.annual;
-        if (!this.state[category] || total_reward > this.state[category] || 0)
+        if (!this.state[category] || total_reward > this.state[category] || 0) {
           this.setState({ [category]: total_reward, [`${category}Card`]: card });
+        }
       });
     });
   }
@@ -44,6 +46,7 @@ export class Result extends Component {
           <Card
             key={category}
             info={this.props[index]}
+            reward={this.state[category]}
             category={category}
             card={this.state[`${category}Card`]}
           />
@@ -62,7 +65,7 @@ export class Result extends Component {
 }
 
 export function Card(props) {
-  const { card, category, info } = props;
+  const { card, category, info, reward } = props;
   return (
     <>
       {card && (
@@ -113,10 +116,8 @@ export function Card(props) {
               </Col>
               <Col xs={6}>Annual Saving</Col>
               <Col xs={3}>
-                ${(info[category] * card[category] * 12) / 100 - card.annual}{' '}
-                {(info[category] * info[`${category}Reward`] * 12) / 100 -
-                  info[`${category}Annual`] <=
-                  (info[category] * card[category] * 12) / 100 - card.annual && (
+                ${Math.round(reward)}{' '}
+                {reward <= (info[category] * card[category] * 12) / 100 - card.annual && (
                   <FaCrown style={{ color: 'darkorange', margin: '-5px 0 0 0' }} />
                 )}
               </Col>
