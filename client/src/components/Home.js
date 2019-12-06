@@ -34,7 +34,7 @@ export default function Home() {
                 <IoIosCard className="icon" />
                 <h3>Best Card</h3>
                 <p>Highest reward on different category</p>
-                <Button variant="primary" href="/category">
+                <Button variant="primary" href="/rank">
                   Learn More
                 </Button>
               </ScrollAnimation>
@@ -44,7 +44,7 @@ export default function Home() {
                 <FaWindowRestore className="icon" />
                 <h3>Card Picker</h3>
                 <p>Best card based on your spend</p>
-                <Button variant="primary" href="/category">
+                <Button variant="primary" href="/card-picker">
                   Learn More
                 </Button>
               </ScrollAnimation>
