@@ -99,7 +99,7 @@ export function Card(props) {
               <Col xs={3}>{card[category]}</Col>
             </Row>
             <Row>
-              <Col xs={3}>{info[`${category}Annual`]}</Col>
+              <Col xs={3}>{info[`${category}Annual`] | 0}</Col>
               <Col xs={6}>Annual Fee</Col>
               <Col xs={3}>{card.annual}</Col>
             </Row>
@@ -108,16 +108,18 @@ export function Card(props) {
                 $
                 {(info[category] * info[`${category}Reward`] * 12) / 100 -
                   info[`${category}Annual`]}
-                {(info[category] * info[`${category}Reward`] * 12) / 100 -
-                  info[`${category}Annual`] >=
-                  (info[category] * card[category] * 12) / 100 - card.annual && (
+                {reward <=
+                  (info[category] * info[`${category}Reward`] * 12) / 100 -
+                    info[`${category}Annual`] && (
                   <FaCrown style={{ color: 'darkorange', margin: '-5px 0 0 0' }} />
                 )}
               </Col>
               <Col xs={6}>Annual Saving</Col>
               <Col xs={3}>
                 ${Math.round(reward)}{' '}
-                {reward <= (info[category] * card[category] * 12) / 100 - card.annual && (
+                {reward >=
+                  (info[category] * info[`${category}Reward`] * 12) / 100 -
+                    info[`${category}Annual`] && (
                   <FaCrown style={{ color: 'darkorange', margin: '-5px 0 0 0' }} />
                 )}
               </Col>
