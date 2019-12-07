@@ -81,6 +81,10 @@ export function Spend(props) {
     props.handleRewardBlur(category, step - 1);
   };
 
+  const handleAnnualBlur = () => {
+    props.handleAnnualBlur(category, step - 1);
+  };
+
   const handleRewardChange = e => {
     if (e.target.value === 'custom') {
       setCustom(true);
@@ -195,7 +199,7 @@ export function Spend(props) {
                 startAdornment={<InputAdornment position="start">$</InputAdornment>}
                 endAdornment={<InputAdornment position="end">/year</InputAdornment>}
                 onChange={handleInputChange}
-                onBlur={handleBlur}
+                onBlur={handleAnnualBlur}
                 inputProps={{
                   step: 100,
                   min: 0,

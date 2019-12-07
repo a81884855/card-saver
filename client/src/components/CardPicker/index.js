@@ -36,6 +36,7 @@ export class VerticalLinearStepper extends Component {
     this.handleCategoryDetail = this.handleCategoryDetail.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleRewardBlur = this.handleRewardBlur.bind(this);
+    this.handleAnnualBlur = this.handleAnnualBlur.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -135,8 +136,16 @@ export class VerticalLinearStepper extends Component {
     let item = this.state[step];
     if (item[`${category}Reward`] > 100) {
       item[`${category}Reward`] = 100;
-    } else if (item[category] < 0 || item[category] === '') {
+    } else if (item[`${category}Reward`] < 0 || item[`${category}Reward`] === '') {
       item[`${category}Reward`] = 0;
+    }
+    this.setState({ item });
+  }
+
+  handleAnnualBlur(category, step) {
+    let item = this.state[step];
+    if (item[`${category}Annual`] < 0 || !item[`${category}Annual`]) {
+      item[`${category}Annual`] = 0;
     }
     this.setState({ item });
   }
@@ -154,6 +163,7 @@ export class VerticalLinearStepper extends Component {
           handleCategoryDetail={this.handleCategoryDetail}
           handleBlur={this.handleBlur}
           handleRewardBlur={this.handleRewardBlur}
+          handleAnnualBlur={this.handleAnnualBlur}
           {...this.state}
           step={step}
         />
