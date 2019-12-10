@@ -3,7 +3,6 @@ import { graphql } from 'react-apollo';
 import { getCardsQuery } from '../../queries/queries.js';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Container, Row, Col, Image, Modal, Button } from 'react-bootstrap';
-import { FaCrown } from 'react-icons/fa';
 import CardDetail from '../Category/CardDetail';
 
 export class Result extends Component {
@@ -106,7 +105,12 @@ export function Card(props) {
           >
             <h3 style={{ textTransform: 'capitalize', textAlign: 'center' }}>{category} Card</h3>
             <Image
-              src={`/images/${card.image}`}
+              src={
+                reward >=
+                (info[category] * info[`${category}Reward`] * 12) / 100 - info[`${category}Annual`]
+                  ? `/images/${card.image}`
+                  : `/images/blank.jpg`
+              }
               style={{
                 width: '100%',
                 border: 'none'
@@ -139,7 +143,7 @@ export function Card(props) {
                   {reward <=
                     (info[category] * info[`${category}Reward`] * 12) / 100 -
                       info[`${category}Annual`] && (
-                    <FaCrown style={{ color: 'darkorange', margin: '-5px 0 0 0' }} />
+                    <Image src="/win.png" style={{ width: 38, marginLeft: 3 }} />
                   )}
                 </Col>
                 <Col xs={6}>Annual Saving</Col>
@@ -148,7 +152,7 @@ export function Card(props) {
                   {reward >=
                     (info[category] * info[`${category}Reward`] * 12) / 100 -
                       info[`${category}Annual`] && (
-                    <FaCrown style={{ color: 'darkorange', margin: '-5px 0 0 0' }} />
+                    <Image src="/win.png" style={{ width: 38, marginLeft: 3 }} />
                   )}
                 </Col>
               </Row>
