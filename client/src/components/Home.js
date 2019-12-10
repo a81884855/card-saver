@@ -23,7 +23,7 @@ export default function Home() {
               <ScrollAnimation animateIn="flipInY" animateOnce={true}>
                 <IoIosCalculator className="icon" />
                 <h3>Calcultor</h3>
-                <p>Find out how much you can earning</p>
+                <p>Find out how much you can earn</p>
                 <Button variant="primary" href="/calculator">
                   Learn More
                 </Button>
@@ -33,7 +33,7 @@ export default function Home() {
               <ScrollAnimation delay={250} animateIn="flipInY" animateOnce={true}>
                 <IoIosCard className="icon" />
                 <h3>Best Card</h3>
-                <p>Highest reward on different category</p>
+                <p>Highest reward on different categories</p>
                 <Button variant="primary" href="/rank">
                   Learn More
                 </Button>
@@ -43,7 +43,7 @@ export default function Home() {
               <ScrollAnimation delay={500} animateIn="flipInY" animateOnce={true}>
                 <FaWindowRestore className="icon" />
                 <h3>Card Advisor</h3>
-                <p>Best card based on your spend</p>
+                <p>Best card based on your spending</p>
                 <Button variant="primary" href="/card-advisor">
                   Learn More
                 </Button>
@@ -65,7 +65,7 @@ export default function Home() {
                 <h3>About Us</h3>
                 <p>
                   Our mission is helping everyone to find out the best credit card in a simple, fast
-                  and elegance way
+                  and elegant way
                 </p>
               </ScrollAnimation>
             </Col>
