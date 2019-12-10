@@ -11,7 +11,7 @@ export default function Home() {
         <div className="content">
           <div className="title">Find the best Credit Card</div>
           <div className="text">Earn on every dollar you spend</div>
-          <Button href="/card-picker" variant="primary" size="lg" style={{ marginTop: 30 }}>
+          <Button href="/card-advisor" variant="primary" size="lg" style={{ marginTop: 30 }}>
             Explore
           </Button>
         </div>
@@ -42,9 +42,9 @@ export default function Home() {
             <Col className="col" sm={10} md={4} lg={4}>
               <ScrollAnimation delay={500} animateIn="flipInY" animateOnce={true}>
                 <FaWindowRestore className="icon" />
-                <h3>Card Picker</h3>
+                <h3>Card Advisor</h3>
                 <p>Best card based on your spend</p>
-                <Button variant="primary" href="/card-picker">
+                <Button variant="primary" href="/card-advisor">
                   Learn More
                 </Button>
               </ScrollAnimation>

@@ -13,7 +13,7 @@ export default function Header() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/card-picker">Card Picker</Nav.Link>
+            <Nav.Link href="/card-advisor">Card Advisor</Nav.Link>
             <Nav.Link href="/rank">Rank</Nav.Link>
             <Nav.Link href="/calculator">Calculator</Nav.Link>
             <Nav.Link href="/cards">All Cards</Nav.Link>

@@ -6,7 +6,7 @@ import Categories from './components/Category';
 import NotFound from './components/NotFound';
 import Calculator from './components/Calculator/';
 import Home from './components/Home';
-import CardPicker from './components/CardPicker/';
+import CardAdvisor from './components/CardAdvisor/';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path="/rank" exact render={() => <Categories />} />
           <Route path="/cards" exact render={props => <AllCards {...props} />} />
           <Route path="/calculator" exact render={props => <Calculator {...props} />} />
-          <Route path="/card-picker" exact render={props => <CardPicker {...props} />} />
+          <Route path="/card-advisor" exact render={props => <CardAdvisor {...props} />} />
           <Route render={props => <NotFound {...props} />} />
         </Switch>
       </Layout>
