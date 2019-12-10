@@ -19,9 +19,10 @@ export class Result extends Component {
     cards.forEach(card => {
       categories.forEach((category, index) => {
         let total_reward = card[category] * 12 * this.props[index][category];
-        let overLimit = total_reward > card[`${category}Limit`];
+        let overLimit = this.props[index][category] * 12 > card[`${category}Limit`];
         if (overLimit)
-          total_reward -= ((card[category] - 1) / 100) * (total_reward - card[`${category}Limit`]);
+          total_reward -=
+            ((card[category] - 1) / 100) * 12 * (total_reward - card[`${category}Limit`]);
         total_reward = total_reward / 100 - card.annual;
         if (!this.state[category] || total_reward > this.state[category] || 0) {
           this.setState({ [category]: total_reward, [`${category}Card`]: card });
