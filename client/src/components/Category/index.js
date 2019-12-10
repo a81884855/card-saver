@@ -36,7 +36,7 @@ export class Categories extends Component {
             <h3 style={{ margin: '0px 0px 20px 20px' }}>Category</h3>
             <Row style={{ margin: '0 auto 10px', width: '95%' }}>
               {allCategory.map(category => (
-                <Col xs={4} className="categories">
+                <Col xs={4} className="categories" key={category}>
                   <button
                     className="category_container"
                     onClick={() => this.setState({ category })}
