@@ -69,6 +69,7 @@ export function CustomSlider(props) {
     } else {
       return data.Cards.sort((a, b) => b[categoryName] - a[categoryName])
         .slice(0, 6)
+        .filter(card => card[categoryName] > 2)
         .map(card => {
           return (
             <MenuItem
