@@ -101,7 +101,12 @@ export function Card(props) {
             lg={4}
             key={card.id}
             style={{ margin: '10px auto 30px' }}
-            onClick={() => setShow(true)}
+            onClick={() =>
+              reward >=
+              (info[category] * info[`${category}Reward`] * 12) / 100 - info[`${category}Annual`]
+                ? setShow(true)
+                : null
+            }
           >
             <h3 style={{ textTransform: 'capitalize', textAlign: 'center' }}>{category} Card</h3>
             <Image
@@ -109,7 +114,7 @@ export function Card(props) {
                 reward >=
                 (info[category] * info[`${category}Reward`] * 12) / 100 - info[`${category}Annual`]
                   ? `/images/${card.image}`
-                  : `/images/blank.jpg`
+                  : `/images/blank.png`
               }
               style={{
                 width: '100%',
@@ -117,7 +122,12 @@ export function Card(props) {
               }}
               thumbnail
             />
-            <p style={{ textAlign: 'center', fontSize: '1.3rem', color: 'tomato' }}>{card.name}</p>
+            <p style={{ textAlign: 'center', fontSize: '1.3rem', color: 'tomato' }}>
+              {reward >=
+              (info[category] * info[`${category}Reward`] * 12) / 100 - info[`${category}Annual`]
+                ? card.name
+                : 'Your Credti Card'}
+            </p>
             <Container style={{ textAlign: 'center' }}>
               <Row style={{ fontWeight: 700 }}>
                 <Col xs={3}>Yours</Col>
