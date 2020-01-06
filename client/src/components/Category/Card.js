@@ -38,7 +38,7 @@ export default function Card(props) {
       </Modal>
       <li
         className={hovered ? 'pulse animated ' : ''}
-        style={{ marginBottom: '18px' }}
+        style={{ marginBottom: '18px', cursor: 'pointer' }}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
       >
