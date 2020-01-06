@@ -65,10 +65,8 @@ export class Result extends Component {
   }
 }
 
-export function Card(props) {
-  const { card, category, info, reward } = props;
+export function Card({ card, category, info, reward }) {
   const [show, setShow] = useState(false);
-
   return (
     <>
       {card && (
@@ -110,24 +108,14 @@ export function Card(props) {
           >
             <h3 style={{ textTransform: 'capitalize', textAlign: 'center' }}>{category} Card</h3>
             <Image
-              src={
-                reward >=
-                (info[category] * info[`${category}Reward`] * 12) / 100 - info[`${category}Annual`]
-                  ? `/images/${card.image}`
-                  : `/images/blank.png`
-              }
+              src={`/images/${card.image}`}
               style={{
                 width: '100%',
                 border: 'none'
               }}
               thumbnail
             />
-            <p style={{ textAlign: 'center', fontSize: '1.3rem', color: 'tomato' }}>
-              {reward >=
-              (info[category] * info[`${category}Reward`] * 12) / 100 - info[`${category}Annual`]
-                ? card.name
-                : 'Your Credti Card'}
-            </p>
+            <p style={{ textAlign: 'center', fontSize: '1.3rem', color: 'tomato' }}>{card.name} </p>
             <Container style={{ textAlign: 'center' }}>
               <Row style={{ fontWeight: 700 }}>
                 <Col xs={3}>Yours</Col>
@@ -137,7 +125,7 @@ export function Card(props) {
               </Row>
               <Row>
                 <Col xs={3}>{info[`${category}Reward`]}</Col>
-                <Col xs={6}>% Reward</Col>
+                <Col xs={6}>% Reward </Col>
                 <Col xs={3}>{card[category]}</Col>
               </Row>
               <Row>
