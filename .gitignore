@@ -1,5 +1,6 @@
+# package directories
 node_modules
-.*
-*.pem
-config.json
-Super-Card-Saver-5c5fa83a38c9.json
+jspm_packages
+
+# Serverless directories
+.serverless
