@@ -27,3 +27,8 @@ yarn-error.log*
 config.json
 
 Super-Card-Saver-5c5fa83a38c9.json
+
+# serverless
+.serverless
+
+config.json
