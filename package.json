@@ -1,0 +1,35 @@
+{
+  "name": "super-card-saver",
+  "version": "1.0.0",
+  "description": "Initial Commit",
+  "main": "index.js",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.18.2",
+    "react-scroll-up-button": "^1.6.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm start --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a81884855/card-saver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a81884855/card-saver/issues"
+  },
+  "homepage": "https://github.com/a81884855/card-saver#readme"
+}
