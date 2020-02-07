@@ -1,0 +1,23 @@
+org: a81884855
+app: super-card-saver
+service: space-x-backend
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+plugins:
+  - serverless-offline
+
+functions:
+  graphql:
+    handler: src/graphql.handler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true
