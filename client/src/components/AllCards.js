@@ -39,6 +39,7 @@ export class CardList extends Component {
     if (data.loading) {
       return <CircularProgress />;
     } else {
+      if (!data.Cards) return <div>Sorry! Can't fetch data from server</div>;
       return data.Cards.map(card => {
         return <Card key={card.id} card={card} handleShow={this.handleShow} />;
       });
