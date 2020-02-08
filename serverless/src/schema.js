@@ -40,17 +40,22 @@ module.exports.typeDefs = gql(
   }
 
   type Category {
+    id: ID
     name: String
     detail: String
+    merchant: [String]
   }
 
   type Result {
-    message: String
+    title: String
+    content:String
   }
 
   type Query {
-    categories: [Category]
-    cards: [Card]
+    Category(name: String): Category
+    Categories(name: String): [Category]
+    Cards: [Card]
+    Card(name: String!): Card
   }
 
   type Mutation {
