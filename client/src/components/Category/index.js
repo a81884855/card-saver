@@ -1,60 +1,42 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { graphql } from 'react-apollo';
-import { getCardsQuery } from '../../queries/queries.js';
+import { getCategoriesQuery } from '../../queries/queries.js';
 import { Container, Row, Col } from 'react-bootstrap';
 import Category from './Category';
 import displayIcon from '../../assets/helper/displayIcon';
 
-const allCategory = [
-  'gas',
-  'restaurant',
-  'grocery',
-  'travel',
-  'online',
-  'furnitures',
-  'streaming',
-  'utilities',
-  'phone'
-];
+export const Categories = props => {
+  const { data } = props;
+  const [select, setSelect] = useState('Gas');
 
-export class Categories extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: null,
-      category: 'gas'
-    };
-  }
-
-  render() {
-    const { data } = this.props;
-    const { category } = this.state;
+  if (data.loading) {
+    return <></>;
+  } else {
+    if (!data.Categories) return <div>Sorry! Can't fetch data from server</div>;
+    const { Categories } = data;
     return (
-      <Container style={{ margin: '1rem auto', minHeight: '100vh' }}>
-        <Row>
+      <Container style={{ margin: '1rem auto' }}>
+        <Row style={{ minHeight: '100vh' }}>
           <Col sm={12} lg={5}>
             <h3 style={{ margin: '0px 0px 20px 20px' }}>Category</h3>
             <Row style={{ margin: '0 auto 10px', width: '95%' }}>
-              {allCategory.map(category => (
-                <Col xs={4} className="categories" key={category}>
-                  <button
-                    className="category_container"
-                    onClick={() => this.setState({ category })}
-                  >
-                    {displayIcon(category)}
-                    <span style={{ textTransform: 'capitalize' }}>{category}</span>
+              {Categories.map(category => (
+                <Col xs={4} className="categories" key={category.name}>
+                  <button className="category_container" onClick={() => setSelect(category.name)}>
+                    {displayIcon(category.name)}
+                    <span style={{ textTransform: 'capitalize' }}>{category.name}</span>
                   </button>
                 </Col>
               ))}
             </Row>
           </Col>
           <Col style={{ background: 'aliceblue' }}>
-            <Category data={data} category={category} />
+            <Category data={data} category={select.toLowerCase()} />
           </Col>
         </Row>
       </Container>
     );
   }
-}
+};
 
-export default graphql(getCardsQuery)(Categories);
+export default graphql(getCategoriesQuery)(Categories);
