@@ -6,13 +6,16 @@ const { mongoDBUri } = require("../config.json");
 
 let conn = null;
 
-const connFunc = async (connection, name, Schema) => {
+const connFunc = async connection => {
   if (connection == null) {
     connection = await mongoose.createConnection(mongoDBUri, {
       bufferCommands: false, // Disable mongoose buffering
       bufferMaxEntries: 0 // and MongoDB driver buffering
     });
-    connection.model(name, new mongoose.Schema(Schema));
+    connection.model("category", new mongoose.Schema(categorySchema));
+    connection.model("card", new mongoose.Schema(cardSchema));
+    connection.model("comment", new mongoose.Schema(commentSchema));
+
     return connection;
   }
 
@@ -20,8 +23,18 @@ const connFunc = async (connection, name, Schema) => {
 };
 
 module.exports = {
+  category: async (name = "") => {
+    conn = await connFunc(conn);
+
+    const Categroy = conn.model("category");
+
+    const result = await Categroy.findOne({ name });
+
+    return result;
+  },
+
   categories: async () => {
-    conn = await connFunc(conn, "category", categorySchema);
+    conn = await connFunc(conn);
 
     const Categroy = conn.model("category");
 
@@ -30,8 +43,18 @@ module.exports = {
     return result;
   },
 
+  card: async name => {
+    conn = await connFunc(conn);
+
+    const Card = conn.model("card");
+
+    const result = await Card.findOne({ name });
+
+    return result;
+  },
+
   cards: async () => {
-    conn = await connFunc(conn, "card", cardSchema);
+    conn = await connFunc(conn);
 
     const Card = conn.model("card");
 
@@ -41,7 +64,7 @@ module.exports = {
   },
 
   addComment: async (args, context) => {
-    conn = await connFunc(conn, "comment", commentSchema);
+    conn = await connFunc(conn);
 
     const Comment = conn.model("comment");
 
