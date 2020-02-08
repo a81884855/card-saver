@@ -7,7 +7,7 @@ import displayIcon from '../../assets/helper/displayIcon';
 import Card from './Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-export function Category(props) {
+export const Category = props => {
   const displayCards = props => {
     let { data, category } = props;
     if (data.loading) {
@@ -70,7 +70,7 @@ export function Category(props) {
       <ol>{displayCards(props)}</ol>
     </Container>
   );
-}
+};
 
 export default graphql(getCategoryQuery, {
   options: props => {
