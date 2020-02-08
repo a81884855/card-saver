@@ -80,6 +80,15 @@ const getCardQuery = gql`
   }
 `;
 
+const getCategoriesQuery = gql`
+  {
+    Categories {
+      name
+      id
+    }
+  }
+`;
+
 const getCategoryQuery = gql`
   query($name: String!) {
     Category(name: $name) {
@@ -88,6 +97,7 @@ const getCategoryQuery = gql`
       detail
       merchant
     }
+
     Cards {
       id
       name
@@ -135,4 +145,4 @@ const addCommentMutation = gql`
   }
 `;
 
-export { getCardsQuery, getCardQuery, getCategoryQuery, addCommentMutation };
+export { getCardsQuery, getCardQuery, getCategoriesQuery, getCategoryQuery, addCommentMutation };
