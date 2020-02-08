@@ -14,7 +14,7 @@ export default function Header() {
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/card-advisor">Card Advisor</Nav.Link>
-            <Nav.Link href="/rank">Rank</Nav.Link>
+            <Nav.Link href="/category">Category</Nav.Link>
             <Nav.Link href="/calculator">Calculator</Nav.Link>
             <Nav.Link href="/cards">All Cards</Nav.Link>
           </Nav>
