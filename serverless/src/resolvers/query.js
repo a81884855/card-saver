@@ -1,13 +1,25 @@
 const db = require("../db");
 
 module.exports = {
-  cards: async (args, context) => {
+  Card: async (args, context) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    const result = await db.card(args.name);
+    return result;
+  },
+
+  Cards: async (args, context) => {
     context.callbackWaitsForEmptyEventLoop = false;
     const result = await db.cards();
     return result;
   },
 
-  categories: async (args, context) => {
+  Category: async (args, context) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    const result = await db.category(args.name);
+    return result;
+  },
+
+  Categories: async (args, context) => {
     context.callbackWaitsForEmptyEventLoop = false;
     const result = await db.categories();
     return result;
